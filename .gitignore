@@ -1,3 +1,37 @@
-#Virtual variables
+# --- Segurança e Credenciais ---
 .env
+.env.local
+*.pem
 
+# --- Ambientes Virtuais (Python / UV) ---
+.venv/
+venv/
+env/
+ENV/
+.uv/
+
+# --- Compilação e Cache do Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Dados Gerados em Tempo de Execução ---
+*.db
+*.sqlite
+*.sqlite3
+emporio_musica.db
+faiss_index/
+
+# --- Configurações de IDEs e Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Arquivos do Sistema Operacional ---
+.DS_Store
+Thumbs.db
