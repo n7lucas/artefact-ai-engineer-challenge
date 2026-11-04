@@ -21,7 +21,7 @@ def parse_spec_field(specs_json: str, field_name: str) -> str:
 
 def init_database(db_path: str = settings.db_path) -> sqlite3.Connection:
     """Load all CSV files from Emporio da Musica, apply the necessary processing, and persist them to the database.."""
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, check_same_thread=False)
     
    
     csv_mapping = {

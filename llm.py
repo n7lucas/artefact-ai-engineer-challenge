@@ -1,6 +1,7 @@
 import os
 from langchain_openai import ChatOpenAI
 from config import settings
+from typing import List, Any
 
 def init_observability():
     """Garante que as variáveis de ambiente do LangSmith estejam ativas no processo."""
@@ -12,7 +13,7 @@ def init_observability():
     else:
         print("ℹ️ LangSmith Observability: Desativado (chave de API não fornecida).")
 
-def get_resilient_llm():
+def get_resilient_llm(tools: List[Any] = None) -> Any:
     """Configura o modelo principal via OpenRouter com fallback automático para a API direta da OpenAI."""
     init_observability()
 
@@ -31,6 +32,13 @@ def get_resilient_llm():
             temperature=0.2
         )
 
+      
+        if tools:
+            primary_with_tools = primary_llm.bind_tools(tools)
+            fallback_with_tools = fallback_llm.bind_tools(tools)
+            return primary_with_tools.with_fallbacks([fallback_with_tools])
+
+        
         
         return primary_llm.with_fallbacks([fallback_llm])
 
